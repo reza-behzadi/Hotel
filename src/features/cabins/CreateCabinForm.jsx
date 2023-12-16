@@ -16,7 +16,7 @@ function CreateCabinForm() {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
 
   const { errors } = formState;
-  console.log(errors);
+ 
 
   const queryClient = useQueryClient();
 
@@ -37,7 +37,6 @@ function CreateCabinForm() {
   }
 
   function onError(errors) {
-    console.log(errors);
   }
 
   return (
