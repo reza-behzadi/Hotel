@@ -5,6 +5,11 @@ import CreateCabinForm from './CreateCabinForm'
 import { useDeleteCabin } from "./useDeleteCabin";
 import { formatCurrency } from '../../utils/helpers'
 
+import { FaCopy } from "react-icons/fa";
+import { FaPen } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
+import { useCreateCabin } from "./useCreateCabin";
+
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -48,9 +53,24 @@ const Discount = styled.div`
 function CabinRow({ cabin }) {
   const [showForm,setShowForm]=useState(false)
   const { isDeleting, deleteCabin } = useDeleteCabin();
+  const { isCreating, createCabin } = useCreateCabin();
 
-  const { id: cabinId, name, maxCapacity, regularPrice, discount, image } = cabin;
+  const {
+    id: cabinId,
+    name,
+    maxCapacity,
+    regularPrice,
+    discount,
+    image,
+    description,
+  } = cabin;
     
+  function handleDuplicate() {
+    createCabin({
+      name: `copy of ${name}`,
+      maxCapacity,regularPrice,discount,image,description
+    })
+  }
   return (
     <>
       <TableRow role="row">
@@ -60,9 +80,10 @@ function CabinRow({ cabin }) {
         <Price>{formatCurrency(regularPrice)}</Price>
         {discount?(<Discount>{formatCurrency(discount)}</Discount>):(<span>&mdash;</span>)}
         <div>
-          <button onClick={() => setShowForm((show) => !show)}>Edit</button>
+          <button disabled={isCreating} onClick={handleDuplicate}><FaCopy/></button>
+          <button onClick={() => setShowForm((show) => !show)}><FaPen/></button>
           <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
-            Delete
+            <FaTrashAlt/>
           </button>
         </div>
       </TableRow>
