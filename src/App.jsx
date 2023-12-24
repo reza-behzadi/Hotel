@@ -37,7 +37,7 @@ function App() {
             <Route path="bookings" element={<Bookings />} />
             <Route path="cabins" element={<Cabins />} />
             <Route path="users" element={<Users />} />
-            <Route path="settings" element={<Settings />} />
+            <Route path="setting" element={<Settings />} />
             <Route path="account" element={<Account />} />
           </Route>
 
