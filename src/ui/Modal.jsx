@@ -1,4 +1,4 @@
-import { Children, cloneElement, createContext, useContext, useEffect, useRef, useState } from "react";
+import {  cloneElement, createContext, useContext,  useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
@@ -78,10 +78,10 @@ function Window({ children, name }) {
   return createPortal(
     <Overlay>
       <StyledModal ref={ref}>
-        <Button onClick={close}>
+        <Button onClick={close} >
           <HiXMark />
-        </Button>
-        <div>{cloneElement(children, { onCloseNodal: close }) }</div>
+        </Button >
+        <div>{cloneElement(children, { onCloseModal: close }) }</div>
       </StyledModal>
     </Overlay>,
     document.body
